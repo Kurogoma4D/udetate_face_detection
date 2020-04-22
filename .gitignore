@@ -1,0 +1,6 @@
+# Node environment
+.node-version
+node_modules
+
+# webpack build
+dist
