@@ -1,0 +1,28 @@
+{
+  "name": "three_vrm_playground_client",
+  "version": "1.0.0",
+  "description": "Just playground using VRM model.",
+  "main": "index.js",
+  "scripts": {
+    "build": "rimraf dist && webpack",
+    "dev": "npm run build && webpack-dev-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kurogoma4D",
+  "license": "MIT",
+  "dependencies": {
+    "@pixiv/three-vrm": "^0.3.3",
+    "three": "^0.115.0",
+    "typescript": "^3.8.3"
+  },
+  "devDependencies": {
+    "@types/three": "^0.103.2",
+    "copy-webpack-plugin": "^5.1.1",
+    "rimraf": "^3.0.2",
+    "serve": "^11.3.0",
+    "ts-loader": "^6.2.2",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
+  }
+}

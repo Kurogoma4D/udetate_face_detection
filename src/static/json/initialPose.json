@@ -1,0 +1,23 @@
+{
+  "hips": {
+    "rotation": [0.0, 1.0, 0.0, 0.0]
+  },
+  "leftShoulder": {
+    "rotation": [0.0, 0.0, 0.087156, 0.996195]
+  },
+  "rightShoulder": {
+    "rotation": [0.0, 0.0, -0.087156, 0.996195]
+  },
+  "leftUpperArm": {
+    "rotation": [0.0, 0.0, 0.5, 0.866025]
+  },
+  "rightUpperArm": {
+    "rotation": [0.0, 0.0, -0.5, 0.866025]
+  },
+  "leftLowerArm": {
+    "rotation": [0.0, 0.0, 0.087156, 0.996195]
+  },
+  "rightLowerArm": {
+    "rotation": [0.0, 0.0, -0.087156, 0.996195]
+  }
+}
