@@ -18,6 +18,8 @@ const initScene = () => {
   scene.background = new THREE.Color(0x424242);
   scene.fog = new THREE.FogExp2(0x424242, 0.002);
   const clock = new THREE.Clock();
+  let poses: any[] = [];
+  let tick = 0;
 
   clock.start();
 
@@ -41,9 +43,13 @@ const initScene = () => {
       VRM.from(gltf).then((vrm) => {
         scene.add(vrm.scene);
         model = vrm;
-        fetch("./static/json/initialPose.json")
+        fetch("./static/json/pose_animation.json")
           .then((res) => res.json())
-          .then((json) => model?.humanoid?.setPose(json));
+          .then((json) => {
+            console.log(json);
+            poses = [...json];
+          });
+        model.scene.rotateY(Math.PI);
         camera.lookAt(
           vrm.humanoid!.getBoneNode(VRMSchema.HumanoidBoneName.Hips)!.position
         );
@@ -53,8 +59,12 @@ const initScene = () => {
 
   const animate = () => {
     const delta = clock.getDelta();
+    if (poses.length !== 0) {
+      model?.humanoid?.setPose(poses[tick % poses.length]);
+    }
     model?.update(delta);
     renderer.render(scene, camera);
+    tick++;
     requestAnimationFrame(animate);
   };
   animate();
