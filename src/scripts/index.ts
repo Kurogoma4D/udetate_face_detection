@@ -7,10 +7,23 @@ import {
   setupLight,
   setupObject,
 } from "./setup_scene";
+import * as dat from "dat.gui";
 
 window.addEventListener("DOMContentLoaded", () => {
   initScene();
 });
+
+class Controller {
+  animationFrame = 0;
+
+  increment() {
+    this.animationFrame++;
+  }
+
+  decrement() {
+    this.animationFrame--;
+  }
+}
 
 const initScene = () => {
   let model: VRM | null = null;
@@ -20,6 +33,12 @@ const initScene = () => {
   const clock = new THREE.Clock();
   let poses: any[] = [];
   let tick = 0;
+  const controller = new Controller();
+  const gui = new dat.GUI();
+
+  gui.add(controller, "animationFrame", 0, 60);
+  gui.add(controller, "increment");
+  gui.add(controller, "decrement");
 
   clock.start();
 
@@ -27,7 +46,8 @@ const initScene = () => {
 
   const renderer = setupRenderer();
   const canvas = renderer.domElement;
-  document.body.appendChild(canvas);
+  const canvasContainer = document.getElementById("canvas-container")!;
+  canvasContainer.appendChild(canvas);
 
   const lights = setupLight();
   scene.add(...lights);
@@ -60,11 +80,13 @@ const initScene = () => {
   const animate = () => {
     const delta = clock.getDelta();
     if (poses.length !== 0) {
+      // model?.humanoid?.setPose(poses[Math.round(controller.animationFrame)]);
       model?.humanoid?.setPose(poses[tick % poses.length]);
     }
+    tick++;
+    gui.updateDisplay();
     model?.update(delta);
     renderer.render(scene, camera);
-    tick++;
     requestAnimationFrame(animate);
   };
   animate();
